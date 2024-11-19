@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1730921351420-2" author="rostyslavpasternak (generated)">
+        <createTable tableName="comments">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_comments"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID"/>
+            <column name="product_id" type="UUID"/>
+            <column name="parent_id" type="UUID"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1730921351420-3" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="comments"
+                                 constraintName="FK_COMMENTS_ON_PARENT" referencedColumnNames="id"
+                                 referencedTableName="comments"/>
+    </changeSet>
+    <changeSet id="1730921351420-4" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="comments"
+                                 constraintName="FK_COMMENTS_ON_PRODUCT" referencedColumnNames="id"
+                                 referencedTableName="products"/>
+    </changeSet>
+    <changeSet id="1730921351420-5" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="comments" constraintName="FK_COMMENTS_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1730921351420-1" author="rostyslavpasternak (generated)">
+        <addDefaultValue columnDataType="double" columnName="rating" defaultValueNumeric="0.0" tableName="products"/>
+    </changeSet>
+
+</databaseChangeLog>

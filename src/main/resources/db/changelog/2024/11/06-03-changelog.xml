@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1730918942503-1" author="rostyslavpasternak (generated)">
+        <createTable tableName="product_user_rating">
+            <column name="product_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_userrating"/>
+            </column>
+            <column name="user_rating" type="DOUBLE"/>
+            <column name="user_rating_key" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_userrating"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1730918942503-2" author="rostyslavpasternak (generated)">
+        <addColumn tableName="products">
+            <column name="rating" type="DOUBLE"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1730918942503-3" author="rostyslavpasternak (generated)">
+        <addNotNullConstraint columnName="rating" tableName="products"/>
+    </changeSet>
+    <changeSet id="1730918942503-4" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_user_rating"
+                                 constraintName="fk_product_userrating_on_product" referencedColumnNames="id"
+                                 referencedTableName="products"/>
+    </changeSet>
+    <changeSet id="1730918942503-5" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_rating_key" baseTableName="product_user_rating"
+                                 constraintName="fk_product_userrating_on_user" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1731624057608-1" author="rostyslavpasternak (generated)">
+        <createTable tableName="image">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_image"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+            <column name="size" type="BIGINT"/>
+            <column name="original_filename" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data" type="BLOB"/>
+            <column name="product_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731624057608-2" author="rostyslavpasternak (generated)">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="image" constraintName="FK_IMAGE_ON_PRODUCT"
+                                 referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+
+</databaseChangeLog>
